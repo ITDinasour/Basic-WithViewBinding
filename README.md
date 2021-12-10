@@ -14,6 +14,11 @@
 ``` 
  Step 2. Add the dependency
  ```kotlin 
+    android{
+        buildFeatures {
+            viewBinding = true
+        }
+    }
  	dependencies { 
  	}
 ```  

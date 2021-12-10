@@ -1,2 +1,3 @@
+include ':basicwithviewbindinglibrary'
 include ':app'
 rootProject.name = "Basic-WithViewBinding"
