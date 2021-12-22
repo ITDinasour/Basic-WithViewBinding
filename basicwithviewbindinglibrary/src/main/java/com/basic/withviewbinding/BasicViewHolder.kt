@@ -14,16 +14,18 @@ import com.basic.withoutbinding.BasicViewHolderWithoutBinding
  *    @泛型   : T-初始化init时的数据类型，VB-布局的ViewBinding类型
  *    @version: 1.0
  */
-open class BasicViewHolder<T : Any, VB : ViewBinding> : BasicViewHolderWithoutBinding<T>,
-    LifecycleObserver {
+open class BasicViewHolder<T : Any, VB : ViewBinding> :
+    BasicViewHolderWithoutBinding<T>,LifecycleObserver {
     val mViewBinding: VB
 
     constructor(vb: VB) : super(vb.root.context) {
         mViewBinding = vb
+        initAfterConstructor()
     }
 
     constructor(itemView: View) : super(itemView.context) {
         mViewBinding = initViewBinding(this, itemView)
+        initAfterConstructor()
     }
 
     constructor(viewGroup: ViewGroup, attachToParent: Boolean) :
@@ -34,6 +36,11 @@ open class BasicViewHolder<T : Any, VB : ViewBinding> : BasicViewHolderWithoutBi
     ) : super(context) {
         mViewBinding =
             initViewBinding(this, LayoutInflater.from(context), viewGroup, attachToParent)
+        initAfterConstructor()
+    }
+
+    private fun initAfterConstructor() {
+        addOnClickListeners(getClickableViews())
     }
 
     override fun getItemView() = mViewBinding.root

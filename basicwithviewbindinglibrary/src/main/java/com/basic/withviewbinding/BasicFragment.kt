@@ -8,8 +8,8 @@ import com.basic.withoutbinding.BasicFragmentWithoutBinding
 
 /**
  *    @author : Jeffrey
- *    @date   : 2021/5/13-19:15
- *    @泛型   : A-Fragment加入的Activity,VB-Fragment布局的ViewBinding类型
+ *    @date   : 2021/12/31-10:27
+ *    @desc   :
  *    @version: 1.0
  */
 abstract class BasicFragment<A : AppCompatActivity, VB : ViewBinding> :

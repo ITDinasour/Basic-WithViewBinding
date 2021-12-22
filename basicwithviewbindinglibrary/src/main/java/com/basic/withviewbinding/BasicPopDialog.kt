@@ -2,6 +2,7 @@ package com.basic.withviewbinding
 
 import android.app.Activity
 import android.view.LayoutInflater
+import android.view.View
 import androidx.viewbinding.ViewBinding
 import com.basic.withoutbinding.BasicPopDialogWithoutBinding
 
@@ -13,6 +14,9 @@ import com.basic.withoutbinding.BasicPopDialogWithoutBinding
  */
 open class BasicPopDialog<A : Activity, VB : ViewBinding>(mActivity: A) :
     BasicPopDialogWithoutBinding<A>(mActivity) {
-    protected var mViewBinding: VB = initViewBinding(this, LayoutInflater.from(mActivity))
-    override fun initContentView() = mViewBinding.root
+    protected lateinit var mViewBinding: VB
+    override fun initContentView(): View {
+        mViewBinding = initViewBinding(this, LayoutInflater.from(mActivity))
+        return mViewBinding.root;
+    }
 }
