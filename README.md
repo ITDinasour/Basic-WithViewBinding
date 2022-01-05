@@ -20,6 +20,6 @@
         }
     }
  	dependencies { 
-        目前还没有发布
+        implementation 'com.github.ITDinasour:Basic-WithViewBinding:0.1.1'
  	}
 ```  
