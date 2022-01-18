@@ -12,6 +12,7 @@ class MainActivity : BasicActivity<ActivityMainBinding>() {
 
     override fun initView() {
         mViewBinding.tvTitle.setTextColor(getBasicColor(android.R.color.holo_blue_light))
+        ViewHolder(mViewBinding.layoutViewHolder).initView("挺好用的！")
     }
 
     override fun getClickableViews(): Array<out View>? {

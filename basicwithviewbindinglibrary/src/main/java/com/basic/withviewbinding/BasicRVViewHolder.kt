@@ -12,4 +12,7 @@ import com.basic.withoutbinding.BasicRvViewHolderWithoutBinding
  */
 open class BasicRvViewHolder<T : Any?, VB : ViewBinding>(val mViewBinding: VB) :
     BasicRvViewHolderWithoutBinding<T>(mViewBinding.root), LifecycleObserver {
+    init {
+        addOnClickListeners(getClickableViews())
+    }
 }

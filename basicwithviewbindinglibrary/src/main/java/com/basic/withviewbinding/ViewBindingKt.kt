@@ -57,7 +57,7 @@ fun ViewBinding.updateShowHide(isShow: Boolean) = if (isShow) show() else hide()
  */
 fun ViewBinding.updateShowNotShow(isShow: Boolean) = if (isShow) show() else notShow()
 
-fun <VB> initViewBinding(any: Any, view: View): VB {
+fun <VB:ViewBinding> initViewBinding(any: Any, view: View): VB {
     var tempJavaClass: Class<in Any>? = any.javaClass
     var viewBinding: VB? = null
     while (tempJavaClass != null) {
@@ -82,7 +82,7 @@ fun <VB> initViewBinding(any: Any, view: View): VB {
     return viewBinding!!
 }
 
-fun <VB> initViewBinding(
+fun <VB:ViewBinding> initViewBinding(
     any: Any, layoutInflater: LayoutInflater, parent: ViewGroup? = null, contain: Boolean? = false
 ): VB {
     var tempJavaClass: Class<in Any>? = any.javaClass

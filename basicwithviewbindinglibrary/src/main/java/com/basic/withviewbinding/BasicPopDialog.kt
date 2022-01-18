@@ -17,6 +17,7 @@ open class BasicPopDialog<A : Activity, VB : ViewBinding>(mActivity: A) :
     protected lateinit var mViewBinding: VB
     override fun initContentView(): View {
         mViewBinding = initViewBinding(this, LayoutInflater.from(mActivity))
+        addOnClickListeners(getClickableViews())
         return mViewBinding.root;
     }
 }
