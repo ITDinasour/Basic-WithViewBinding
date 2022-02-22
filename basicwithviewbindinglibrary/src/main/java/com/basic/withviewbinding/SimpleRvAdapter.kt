@@ -23,12 +23,10 @@ abstract class SimpleRvAdapter<B : Any?, VB : ViewBinding> :
 
     override fun onBindViewHolder(holder: BasicRvViewHolder<B, VB>, position: Int) {
         getDataItem(position)?.run {
-            bindViewHolder(holder, this, isSelected(this))
+            bindViewHolder(holder, this)
         }
     }
 
-    abstract fun bindViewHolder(
-        holder: BasicRvViewHolder<B, VB>, data: B, selected: Boolean = false
-    )
+    abstract fun bindViewHolder(holder: BasicRvViewHolder<B, VB>, data: B)
 
 }

@@ -57,7 +57,7 @@ fun ViewBinding.updateShowHide(isShow: Boolean) = if (isShow) show() else hide()
  */
 fun ViewBinding.updateShowNotShow(isShow: Boolean) = if (isShow) show() else notShow()
 
-fun <VB:ViewBinding> initViewBinding(any: Any, view: View): VB {
+fun <VB : ViewBinding> initViewBinding(any: Any, view: View): VB {
     var tempJavaClass: Class<in Any>? = any.javaClass
     var viewBinding: VB? = null
     while (tempJavaClass != null) {
@@ -66,11 +66,15 @@ fun <VB:ViewBinding> initViewBinding(any: Any, view: View): VB {
                 for (actualTypeArgument in type.actualTypeArguments) {
                     try {
                         val viewBindingClazz = actualTypeArgument as Class<VB>
-                        val inflate: Method =
-                            viewBindingClazz.getDeclaredMethod("bind", View::class.java)
-                        viewBinding = inflate.invoke(null, view) as VB
-                        tempJavaClass = null
-                        break
+                        try {
+                            val inflate: Method =
+                                viewBindingClazz.getDeclaredMethod("bind", View::class.java)
+                            viewBinding = inflate.invoke(null, view) as VB
+                            tempJavaClass = null
+                            break
+                        } catch (e: Exception) {
+                            BasicUtil.logE(viewBindingClazz.simpleName + " init failed ")
+                        }
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
@@ -82,10 +86,11 @@ fun <VB:ViewBinding> initViewBinding(any: Any, view: View): VB {
     return viewBinding!!
 }
 
-fun <VB:ViewBinding> initViewBinding(
+fun <VB : ViewBinding> initViewBinding(
     any: Any, layoutInflater: LayoutInflater, parent: ViewGroup? = null, contain: Boolean? = false
 ): VB {
     var tempJavaClass: Class<in Any>? = any.javaClass
+    BasicUtil.logI(" initViewBinding ${tempJavaClass?.simpleName} ")
     var viewBinding: VB? = null
     while (tempJavaClass != null) {
         tempJavaClass.genericSuperclass?.let { type ->
@@ -93,16 +98,20 @@ fun <VB:ViewBinding> initViewBinding(
                 for (actualTypeArgument in type.actualTypeArguments) {
                     try {
                         val viewBindingClazz = actualTypeArgument as Class<VB>
-                        val inflate: Method = viewBindingClazz.getDeclaredMethod(
-                            "inflate",
-                            LayoutInflater::class.java,
-                            ViewGroup::class.java,
-                            Boolean::class.java
-                        )
-                        viewBinding =
-                            inflate.invoke(null, layoutInflater, parent, contain) as VB
-                        tempJavaClass = null
-                        break
+                        try {
+                            val inflate: Method = viewBindingClazz.getDeclaredMethod(
+                                "inflate",
+                                LayoutInflater::class.java,
+                                ViewGroup::class.java,
+                                Boolean::class.java
+                            )
+                            viewBinding =
+                                inflate.invoke(null, layoutInflater, parent, contain) as VB
+                            tempJavaClass = null
+                            break
+                        } catch (e: Exception) {
+                            BasicUtil.logE(viewBindingClazz.simpleName + " init failed ")
+                        }
                     } catch (e: Exception) {
                     }
                 }
