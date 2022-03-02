@@ -15,17 +15,17 @@ import com.basic.withoutbinding.BasicViewHolderWithoutBinding
  *    @version: 1.0
  */
 open class BasicViewHolder<T : Any, VB : ViewBinding> :
-    BasicViewHolderWithoutBinding<T>,LifecycleObserver {
-    val mViewBinding: VB
+    BasicViewHolderWithoutBinding<T>, LifecycleObserver {
+    open val mViewBinding: VB
 
     constructor(vb: VB) : super(vb.root.context) {
         mViewBinding = vb
-        initAfterConstructor()
+        addOnClickListeners(getClickableViews())
     }
 
     constructor(itemView: View) : super(itemView.context) {
-        mViewBinding = initViewBinding(this, itemView)
-        initAfterConstructor()
+        mViewBinding = initViewBinding(itemView)
+        addOnClickListeners(getClickableViews())
     }
 
     constructor(viewGroup: ViewGroup, attachToParent: Boolean) :
@@ -35,13 +35,15 @@ open class BasicViewHolder<T : Any, VB : ViewBinding> :
         context: Context, viewGroup: ViewGroup? = null, attachToParent: Boolean = false
     ) : super(context) {
         mViewBinding =
-            initViewBinding(this, LayoutInflater.from(context), viewGroup, attachToParent)
-        initAfterConstructor()
-    }
-
-    private fun initAfterConstructor() {
+            initViewBinding(LayoutInflater.from(context), viewGroup, attachToParent)
         addOnClickListeners(getClickableViews())
     }
+
+
+    protected open fun initViewBinding(view: View) = initViewBinding<VB>(this, view)
+    protected open fun initViewBinding(
+        layoutInflater: LayoutInflater, parent: ViewGroup? = null, contain: Boolean? = false
+    ) = initViewBinding<VB>(this, layoutInflater, parent, contain)
 
     override fun getItemView() = mViewBinding.root
 }

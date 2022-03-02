@@ -14,7 +14,7 @@ import com.basic.withoutbinding.BasicPopDialogWithoutBinding
  */
 open class BasicPopDialog<A : Activity, VB : ViewBinding>(mActivity: A) :
     BasicPopDialogWithoutBinding<A>(mActivity) {
-    protected lateinit var mViewBinding: VB
+    protected open lateinit var mViewBinding: VB
     override fun initContentView(): View {
         mViewBinding = initViewBinding(this, LayoutInflater.from(mActivity))
         addOnClickListeners(getClickableViews())

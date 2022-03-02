@@ -45,6 +45,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    api 'com.github.ITDinasour:Basic-WithoutBind:0.2.4'
+    api 'com.github.ITDinasour:Basic-WithoutBind:0.2.6'
 //    api project(':basiclibrary')
 }

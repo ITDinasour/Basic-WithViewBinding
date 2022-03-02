@@ -3,19 +3,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
     tools:context=".MainActivity">
+
+    <include
+        android:id="@+id/layout_view_holder"
+        layout="@layout/layout_view_holder"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="top" />
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ViewBinding" />
-
-    <include
-        android:id="@+id/layout_view_holder"
-        layout="@layout/layout_view_holder"
+        android:layout_gravity="center"
+        android:background="?android:attr/selectableItemBackground"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
+        android:text="Hello World" />
+    <TextView
+        android:id="@+id/tv_show_pop_dialog"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="?android:attr/selectableItemBackground"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
+        android:text="show pop dialog" />
+    <TextView
+        android:id="@+id/tv_add_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="?android:attr/selectableItemBackground"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
+        android:text="Add Item" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

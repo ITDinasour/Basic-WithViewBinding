@@ -13,9 +13,9 @@ import com.basic.withoutbinding.BasicFragmentWithoutBinding
  *    @version: 1.0
  */
 abstract class BasicFragment<A : AppCompatActivity, VB : ViewBinding> :
-    BasicFragmentWithoutBinding<A>() {
+    BasicFragmentWithoutBinding<A>(){
 
-    protected var mViewBinding: VB? = null
+    protected open var mViewBinding: VB? = null
 
     override fun initRootView(inflater: LayoutInflater, container: ViewGroup?) =
         initViewBinding<VB>(this, inflater, container, false).run {
@@ -23,4 +23,5 @@ abstract class BasicFragment<A : AppCompatActivity, VB : ViewBinding> :
             addOnClickListeners(getClickableViews())
             root
         }
+
 }

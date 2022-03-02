@@ -57,6 +57,38 @@ fun ViewBinding.updateShowHide(isShow: Boolean) = if (isShow) show() else hide()
  */
 fun ViewBinding.updateShowNotShow(isShow: Boolean) = if (isShow) show() else notShow()
 
+inline fun <reified VB : ViewBinding> initViewBinding(view: View): VB {
+    var viewBinding: VB? = null
+    val viewBindingClazz = VB::class.java
+    try {
+        val inflate: Method = viewBindingClazz.getDeclaredMethod("bind", View::class.java)
+        viewBinding = inflate.invoke(null, view) as VB
+    } catch (e: Exception) {
+        BasicUtil.logE(viewBindingClazz.simpleName + " init failed ")
+    }
+    return viewBinding!!
+
+}
+
+inline fun <reified VB : ViewBinding> initViewBinding(
+    layoutInflater: LayoutInflater, parent: ViewGroup? = null, contain: Boolean? = false
+): VB {
+    var viewBinding: VB? = null
+    val viewBindingClazz = VB::class.java
+    try {
+        val inflate: Method = viewBindingClazz.getDeclaredMethod(
+            "inflate",
+            LayoutInflater::class.java,
+            ViewGroup::class.java,
+            Boolean::class.java
+        )
+        viewBinding = inflate.invoke(null, layoutInflater, parent, contain) as VB
+    } catch (e: Exception) {
+        BasicUtil.logE(viewBindingClazz.simpleName + " init failed ")
+    }
+    return viewBinding!!
+}
+
 fun <VB : ViewBinding> initViewBinding(any: Any, view: View): VB {
     var tempJavaClass: Class<in Any>? = any.javaClass
     var viewBinding: VB? = null

@@ -12,13 +12,12 @@ import com.basic.withoutbinding.BasicActivityWithoutBinding
  */
 abstract class BasicActivity<VB : ViewBinding> : BasicActivityWithoutBinding() {
 
-    protected val mViewBinding by lazy<VB>(LazyThreadSafetyMode.PUBLICATION) {
-        initViewBinding(this, layoutInflater)
-    }
+    protected open val mViewBinding by lazy(LazyThreadSafetyMode.NONE) { initViewBinding() }
 
     override fun initContentView() {
         setContentView(mViewBinding.root)
         addOnClickListeners(getClickableViews())
     }
 
+    protected open fun initViewBinding() = initViewBinding<VB>(this, layoutInflater)
 }
