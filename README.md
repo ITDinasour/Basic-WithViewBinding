@@ -20,7 +20,7 @@
         }
     }
  	dependencies { 
-        implementation 'com.github.ITDinasour:Basic-WithViewBinding:0.1.3'
+        implementation 'com.github.ITDinasour:Basic-WithViewBinding:0.1.4'
  	}
 ```  
 
